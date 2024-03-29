@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <title>Low Battery</title>
+</head>
+
+<body>
+    <div class="hero is-fullheight is-link">
+        <div class="hero-head"></div>
+        <di class="hero-body">
+            <div class="container">
+                <div class="level-item">
+                    <h1 class="title is-size-4">Low Battery Film</h1>
+                </div>
+                <br />
+                <video preload="none" id="player" autoplay controls crossorigin></video>
+            </div>
+        </di>
+    </div>
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+    <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.js"></script>
+    <script>
+        (function () {
+            var video = document.querySelector('#player');
+
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource('/lowbattery/film/lowbattery.m3u8');
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                    video.play();
+                });
+            }
+
+            plyr.setup(video);
+        })();
+    </script>
+</body>
+
+</html>
